@@ -43,6 +43,42 @@ public class LeetCode {
         return intResult;
     }
 
+    // https://leetcode.com/problems/valid-sudoku/description/
+    public static boolean isValidSudoku(char[][] board) {
+
+        for(int i = 0; i < 9; i++) {
+            HashSet rows = new HashSet();
+            HashSet cols = new HashSet();
+            for(int j = 0; j < 9; j++) {
+
+                if(rows.contains(board[i][j]))
+                    return false;
+                else if (board[i][j] != '.')
+                    rows.add(board[i][j]);
+
+                if(cols.contains(board[j][i]))
+                    return false;
+                else if (board[j][i] != '.')
+                    cols.add(board[j][i]);
+
+
+                if(i % 3 == 0 && j % 3 == 0) {
+                    HashSet square = new HashSet();
+                    for(int row = i; row < i + 3; row++) {
+                        for(int col = j; col < j + 3; col++) {
+                            if(square.contains(board[row][col]))
+                                return false;
+                            else if(board[row][col] != '.')
+                                square.add(board[row][col]);
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
+    }
+
     public static void main(String[] args) {
 
         System.out.println("893. Groups of Special-Equivalent Strings: " + numSpecialEquivGroups(new String[] {"aa", "ab", "ba", "bb"}));
@@ -54,6 +90,17 @@ public class LeetCode {
         }
         System.out.println();
 
+        char[][] board = new char[][] {{'5','3','.','.','7','.','.','.','.'},
+                {'6','.','.','1','9','5','.','.','.'},
+                {'.','9','8','.','.','.','.','6','.'},
+                {'8','.','.','.','6','.','.','.','3'},
+                {'4','.','.','8','.','3','.','.','1'},
+                {'7','.','.','.','2','.','.','.','6'},
+                {'.','6','.','.','.','.','2','8','.'},
+                {'.','.','.','4','1','9','.','.','5'},
+                {'.','.','.','.','8','.','.','7','9'}};
+        System.out.println("36. Valid Sudoku: " + isValidSudoku(board));
 
+        
     }
 }
