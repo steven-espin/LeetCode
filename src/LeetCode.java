@@ -1,6 +1,7 @@
 import java.util.HashSet;
 import java.util.Arrays;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LeetCode {
 
@@ -79,6 +80,23 @@ public class LeetCode {
         return true;
     }
 
+    public static boolean isIsomorphic(String s, String t) {
+        HashMap<Character, Character> hm = new HashMap();
+
+        for(int i = 0; i < s.length(); i++) {
+            if(!hm.containsKey(s.charAt(i))) {
+                if(hm.containsValue(t.charAt(i)))
+                    return false;
+                hm.put(s.charAt(i), t.charAt(i));
+            }
+            else {
+                if(hm.get(s.charAt(i)) != t.charAt(i))
+                    return false;
+            }
+        }
+        return true;
+    }
+
     public static void main(String[] args) {
 
         System.out.println("893. Groups of Special-Equivalent Strings: " + numSpecialEquivGroups(new String[] {"aa", "ab", "ba", "bb"}));
@@ -101,6 +119,6 @@ public class LeetCode {
                 {'.','.','.','.','8','.','.','7','9'}};
         System.out.println("36. Valid Sudoku: " + isValidSudoku(board));
 
-        
+        System.out.println("205. Isomorphic Strings: " + isIsomorphic("foo", "bar"));
     }
 }
