@@ -80,6 +80,7 @@ public class LeetCode {
         return true;
     }
 
+    // https://leetcode.com/problems/isomorphic-strings/description/
     public static boolean isIsomorphic(String s, String t) {
         HashMap<Character, Character> hm = new HashMap();
 
@@ -94,6 +95,30 @@ public class LeetCode {
                     return false;
             }
         }
+        return true;
+    }
+
+    // https://leetcode.com/problems/word-pattern/description/
+    public static boolean wordPattern(String pattern, String str) {
+        HashMap<Character, String> hm = new HashMap();
+        String[] words = str.split(" ");
+
+        if(words.length != pattern.length())
+            return false;
+
+        for(int i = 0; i < pattern.length(); i++) {
+            if(!hm.containsKey(pattern.charAt(i))) {
+                if(hm.containsValue(words[i]))
+                    return false;
+                hm.put(pattern.charAt(i), words[i]);
+            }
+            else {
+                if(!hm.get(pattern.charAt(i)).equals(words[i])) {
+                    return false;
+                }
+            }
+        }
+
         return true;
     }
 
@@ -120,5 +145,7 @@ public class LeetCode {
         System.out.println("36. Valid Sudoku: " + isValidSudoku(board));
 
         System.out.println("205. Isomorphic Strings: " + isIsomorphic("foo", "bar"));
+
+        System.out.println("290. Word Pattern: " + wordPattern("abba", "dog cat cat dog"));
     }
 }
